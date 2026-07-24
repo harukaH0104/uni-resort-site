@@ -33,7 +33,9 @@ export const RoomsFilter: React.FC<RoomsFilterProps> = ({ selectedRoomType, setS
               style={{
                 ...styles.filterBtn,
                 ...(selectedRoomType === 'ALL' && type === 'ALL' ? styles.activeBtn : 
-                    roomsData.find(r => r.name === selectedRoomType)?.type === type && type !== 'ALL' ? styles.activeBtn : {})
+                    // 🌟 type の後ろに「as string」を書き足すだけで、型認識の衝突が一瞬で解消されます！
+                    roomsData.find(r => r.name === selectedRoomType)?.type === type && (type as string) !== 'ALL' ? styles.activeBtn : {})
+
               }}
             >
               {/* ボタンの文字を大文字にして見栄えを綺麗にするUXパーツ（ ALL / STANDARD / POOL / SUITE / VILLA ） */}
